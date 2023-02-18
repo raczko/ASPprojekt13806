@@ -1,0 +1,23 @@
+﻿@model List<ASPprojekt13806.Models.VehicleRepairs>
+
+<h1>Naprawy pojazdu</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numer naprawy</th>
+            <th>Opis</th>
+            <th>Data naprawy</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Description</td>
+                <td>@item.RepairDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

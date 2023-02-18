@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ASPprojekt13806.Models.Vehicles>
+
+<style>
+    .vehicle-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+        .vehicle-item .vehicle-details {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .vehicle-item .vehicle-image {
+            flex: 1;
+            max-width: 400px;
+            height: auto;
+        }
+</style>
+
+<h1>Pojazdy w naszym komisie</h1>
+<div class="row">
+    @foreach (var vehicle in Model)
+    {
+        <div class="vehicle-item">
+            <div class="vehicle-details">
+                <h4>@vehicle.Brand.Name</h4>
+                <p>Model: @vehicle.Model</p>
+                <p>Categoria: @vehicle.Category.Name</p>
+                <p>Cena: @vehicle.Price.ToString("C2")</p>
+                <p>Produkcja: @vehicle.Year</p>
+                <button>
+                    @Html.ActionLink("Edit", "Edit", new {  id=vehicle.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=vehicle.Id })
+                </button>
+                <td>
+                    <a asp-action="Details" asp-controller="VehicleRepairs" asp-route-id="@vehicle.Id">Wyświetl naprawy</a>
+                </td>
+            </div>
+            <div class="vehicle-image">
+                <img src="@Url.Content("media/Vehicles/" + vehicle.Image)" alt="Vehicle Image" />
+            </div>
+        </div>
+    }
+</div>
+<button type="button">@Html.ActionLink("Create", "Create")</button>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
